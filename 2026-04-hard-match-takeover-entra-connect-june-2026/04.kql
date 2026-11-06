@@ -1,0 +1,8 @@
+// From: https://argusit.nl/en/blog/hard-match-takeover-entra-connect-june-2026
+// Section: Tenant settings you can switch on yourself
+// Read the post first and test in a non-production tenant.
+
+AuditLogs
+| where OperationName in ("Update user", "Set DirSyncEnabled flag")
+| where tostring(TargetResources) has_any ("OnPremisesObjectIdentifier", "DirSyncEnabled")
+| project TimeGenerated, InitiatedBy, TargetResources
