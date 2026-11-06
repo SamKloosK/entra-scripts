@@ -1,0 +1,10 @@
+{
+  "iss": "https://mfa.provider.example",
+  "aud": "<client ID of Entra ID at the provider>",
+  "sub": "<same sub as in the id_token_hint>",
+  "nonce": "<nonce from the request>",
+  "acr": "possessionorinherence",
+  "amr": ["otp"],
+  "iat": 1772100000,
+  "exp": 1772100300
+}
