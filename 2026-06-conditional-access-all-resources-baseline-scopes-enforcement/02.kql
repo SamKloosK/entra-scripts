@@ -1,0 +1,18 @@
+// From: https://argusit.nl/en/blog/conditional-access-all-resources-baseline-scopes-enforcement
+// Section: Finding the affected policies and sign-ins
+// Read the post first and test in a non-production tenant.
+
+let policyId = "<object ID of your All resources policy>";
+let directoryResources = dynamic(["00000003-0000-0000-c000-000000000000", "00000002-0000-0000-c000-000000000000"]);
+union
+    (SigninLogs
+        | where TimeGenerated > ago(14d)
+        | extend CAPolicies = ConditionalAccessPolicies),
+    (AADNonInteractiveUserSignInLogs
+        | where TimeGenerated > ago(14d)
+        | extend CAPolicies = parse_json(ConditionalAccessPolicies))
+| where ResourceIdentity in (directoryResources)
+| mv-expand CAPolicy = CAPolicies
+| where tostring(CAPolicy.id) == policyId and tostring(CAPolicy.result) == "notApplied"
+| summarize SignIns = count(), Users = dcount(UserPrincipalName) by AppDisplayName, AppId, ResourceDisplayName
+| order by SignIns desc

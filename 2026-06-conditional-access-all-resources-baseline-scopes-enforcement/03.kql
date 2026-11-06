@@ -1,0 +1,10 @@
+// From: https://argusit.nl/en/blog/conditional-access-all-resources-baseline-scopes-enforcement
+// Section: The Baseline scopes settings page
+// Read the post first and test in a non-production tenant.
+
+let placeholderAppId = "<application (client) ID of your placeholder app>";
+union SigninLogs, AADNonInteractiveUserSignInLogs
+| where TimeGenerated > ago(14d)
+| where ConditionalAccessAudiences contains placeholderAppId
+| summarize SignIns = count(), Users = dcount(UserPrincipalName) by AppDisplayName, AppId
+| order by SignIns desc
