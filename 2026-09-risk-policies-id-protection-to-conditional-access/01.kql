@@ -1,0 +1,13 @@
+// From: https://argusit.nl/en/blog/risk-policies-id-protection-to-conditional-access
+// Section: Finding legacy policies and comparing outcomes before cutover
+// Read the post first and test in a non-production tenant.
+
+// Sign-ins where a legacy ID Protection policy applied
+SigninLogs
+| where TimeGenerated > ago(30d)
+| extend LegacyPolicy = case(
+    AuthenticationRequirementPolicies has "accountCompromisePolicies", "Legacy user risk policy",
+    AuthenticationRequirementPolicies has "tenantSessionRiskPolicy", "Legacy sign-in risk policy",
+    "")
+| where isnotempty(LegacyPolicy)
+| summarize SignIns = count(), Users = dcount(UserPrincipalName) by LegacyPolicy, ResultType

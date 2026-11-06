@@ -1,0 +1,13 @@
+// From: https://argusit.nl/en/blog/risk-policies-id-protection-to-conditional-access
+// Section: Finding legacy policies and comparing outcomes before cutover
+// Read the post first and test in a non-production tenant.
+
+// Risky sign-ins: legacy sign-in risk policy vs. report-only CA policy
+let ReportOnlyPolicy = "CA-Risk-SignIn-MediumHigh";   // your policy display name
+SigninLogs
+| where TimeGenerated > ago(14d)
+| where RiskLevelDuringSignIn in ("medium", "high")
+| extend Legacy = iff(AuthenticationRequirementPolicies has "tenantSessionRiskPolicy", "legacy applied", "legacy not applied")
+| mv-expand CA = ConditionalAccessPolicies
+| where tostring(CA.displayName) == ReportOnlyPolicy
+| summarize SignIns = count() by Legacy, CAResult = tostring(CA.result)
