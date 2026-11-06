@@ -1,0 +1,12 @@
+// From: https://argusit.nl/en/blog/entra-permissions-management-retires-1-october
+// Section: Keeping least privilege visible with what you already have
+// Read the post first and test in a non-production tenant.
+
+AzureActivity
+| where TimeGenerated > ago(90d)
+| where CategoryValue =~ "Administrative"
+| extend Caller = tolower(Caller)
+| summarize LastActivity = max(TimeGenerated),
+            Operations = make_set(OperationNameValue, 100)
+            by Caller, SubscriptionId
+| order by LastActivity asc
