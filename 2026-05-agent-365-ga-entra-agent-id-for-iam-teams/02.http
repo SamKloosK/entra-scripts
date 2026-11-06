@@ -1,0 +1,5 @@
+# From: https://argusit.nl/en/blog/agent-365-ga-entra-agent-id-for-iam-teams
+# Section: Logs
+# Read the post first and test in a non-production tenant.
+
+GET https://graph.microsoft.com/beta/auditLogs/signIns?$filter=createdDateTime ge 2026-05-13T00:00:00Z and signInEventTypes/any(t: t eq 'servicePrincipal') and agent/agentType eq 'agenticAppInstance'&$top=10

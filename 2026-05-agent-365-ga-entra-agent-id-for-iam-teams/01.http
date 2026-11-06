@@ -1,0 +1,26 @@
+# From: https://argusit.nl/en/blog/agent-365-ga-entra-agent-id-for-iam-teams
+# Section: Conditional Access and ID Protection as of May 2026
+# Read the post first and test in a non-production tenant.
+
+POST https://graph.microsoft.com/beta/identity/conditionalAccess/policies
+Content-type: application/json
+
+{
+    "displayName": "Block all agent identities from accessing resources",
+    "conditions": {
+        "clientApplications": {
+            "includeAgentIdServicePrincipals": ["All"],
+            "excludeAgentIdServicePrincipals": [],
+            "agentIdServicePrincipalFilter": null
+        },
+        "applications": {
+            "includeApplications": ["All"],
+            "excludeApplications": []
+        }
+    },
+    "grantControls": {
+        "operator": "AND",
+        "builtInControls": ["block"]
+    },
+    "state": "enabledForReportingButNotEnforced"
+}
