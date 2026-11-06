@@ -1,0 +1,13 @@
+// From: https://argusit.nl/en/blog/azure-mandatory-mfa-phase-2-resource-manager
+// Section: Finding the affected accounts
+// Read the post first and test in a non-production tenant.
+
+union SigninLogs, AADNonInteractiveUserSignInLogs
+| where TimeGenerated > ago(30d)
+| where ResourceIdentity == "797f4846-ba00-4fd7-ba43-dac1f8f63013"
+| where ResultType == "0"
+| where AuthenticationRequirement == "singleFactorAuthentication"
+| summarize SignIns = count(), Clients = make_set(AppDisplayName),
+    Protocols = make_set(AuthenticationProtocol), IPs = make_set(IPAddress, 20),
+    LastSeen = max(TimeGenerated) by UserPrincipalName, UserType
+| sort by SignIns desc

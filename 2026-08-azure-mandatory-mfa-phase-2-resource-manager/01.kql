@@ -1,0 +1,14 @@
+// From: https://argusit.nl/en/blog/azure-mandatory-mfa-phase-2-resource-manager
+// Section: Finding the affected accounts
+// Read the post first and test in a non-production tenant.
+
+AzureActivity
+| where CategoryValue == "Policy"
+| extend p = parse_json(Properties)
+| extend policies = parse_json(tostring(p.policies))
+| mv-expand policies
+| where tostring(policies.policyDefinitionId) in~ (
+    "/providers/Microsoft.Authorization/policyDefinitions/4e6c27d5-a6ee-49cf-b2b4-d8fe90fa2b8b",
+    "/providers/Microsoft.Authorization/policyDefinitions/db4a9d17-db75-4f46-9fcb-9f9526604417")
+| summarize Events = count(), LastSeen = max(TimeGenerated) by Caller, OperationNameValue
+| sort by Events desc
