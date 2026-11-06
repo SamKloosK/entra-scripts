@@ -1,0 +1,29 @@
+// From: https://argusit.nl/en/blog/finding-adal-apps-after-the-recommendations-api-retires
+// Section: KQL for Log Analytics or Sentinel
+// Read the post first and test in a non-production tenant.
+
+let lookback = 30d;
+let myTenantId = "<your tenant ID>";
+union
+    (SigninLogs
+        | where TimeGenerated > ago(lookback)
+        | extend AppName = AppDisplayName, SignInType = "interactive"),
+    (AADNonInteractiveUserSignInLogs
+        | where TimeGenerated > ago(lookback)
+        | extend AppName = AppDisplayName, SignInType = "nonInteractive"),
+    (AADServicePrincipalSignInLogs
+        | where TimeGenerated > ago(lookback)
+        | extend AppName = ServicePrincipalName, SignInType = "servicePrincipal")
+| mv-expand Detail = parse_json(AuthenticationProcessingDetails)
+| where tostring(Detail.key) == "Azure AD App Authentication Library"
+| extend Library = tostring(Detail.value)
+| where Library has "ADAL"
+| summarize SignIns = count(), Users = dcount(UserPrincipalName), LastSeen = max(TimeGenerated),
+            SignInTypes = make_set(SignInType), Libraries = make_set(Library, 10)
+    by AppId, AppName, AppOwnerTenantId
+| extend Owner = case(
+    AppOwnerTenantId in ("f8cdef31-a31e-4b4a-93e4-5f571e91255a", "72f988bf-86f1-41af-91ab-2d7cd011db47"), "Microsoft",
+    AppOwnerTenantId == myTenantId, "Own tenant",
+    isempty(AppOwnerTenantId), "Unknown",
+    "Other tenant")
+| order by SignIns desc
