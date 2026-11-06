@@ -1,0 +1,10 @@
+// From: https://argusit.nl/en/blog/entra-connect-sync-first-party-app-conditional-access-sign-in-logs
+// Section: Monitoring the sync sign-ins
+// Read the post first and test in a non-production tenant.
+
+let connectorAccounts = dynamic(["<object id 1>", "<object id 2>"]);
+union SigninLogs, AADNonInteractiveUserSignInLogs
+| where TimeGenerated > ago(14d)
+| where UserId in (connectorAccounts)
+| summarize SignIns = count(), LastSeen = max(TimeGenerated)
+    by UserPrincipalName, AppDisplayName, ResourceDisplayName, ResourceIdentity, IPAddress, ResultType, ConditionalAccessStatus

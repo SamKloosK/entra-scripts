@@ -1,0 +1,10 @@
+// From: https://argusit.nl/en/blog/entra-connect-sync-first-party-app-conditional-access-sign-in-logs
+// Section: Monitoring the sync sign-ins
+// Read the post first and test in a non-production tenant.
+
+AADServicePrincipalSignInLogs
+| where TimeGenerated > ago(14d)
+| where ResourceIdentity == "6bf85cfa-ac8a-4be5-b5de-425a0d0dc016"
+    or ResourceDisplayName == "Microsoft Entra AD Synchronization Service"
+| summarize SignIns = count(), LastSeen = max(TimeGenerated), IPs = make_set(IPAddress)
+    by ServicePrincipalName, ServicePrincipalId, ServicePrincipalCredentialThumbprint, ResultType, ConditionalAccessStatus
