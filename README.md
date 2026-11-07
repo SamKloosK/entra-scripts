@@ -1,6 +1,6 @@
 # Entra scripts
 
-PowerShell, KQL and Microsoft Graph scripts for Microsoft Entra ID and identity security. Most of them come from my blog posts on [argusit.nl](https://www.argusit.nl/en/blog), where the post explains what the code does, which permissions it needs and how to read the results.
+PowerShell, KQL and Microsoft Graph scripts for Microsoft Entra ID and identity security. Most of them come from my blog posts on [argusit.nl](https://www.argusit.nl/en/blog), where the post explains what the code does, which permissions it needs and how to read the results. Every post is also available in Dutch on [argusit.nl/nl/blog](https://www.argusit.nl/nl/blog).
 
 Every script is provided as is. Read it before you run it and test it in a non-production tenant first.
 
