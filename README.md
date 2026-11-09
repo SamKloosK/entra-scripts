@@ -25,6 +25,6 @@ Each folder belongs to one post.
 | 2026-08-12 | [Azure mandatory MFA Phase 2: which identities break at the Resource Manager layer](https://www.argusit.nl/en/blog/azure-mandatory-mfa-phase-2-resource-manager) | [2](2026-08-azure-mandatory-mfa-phase-2-resource-manager/) |
 | 2026-09-16 | [Moving ID Protection risk policies to Conditional Access before 1 October](https://www.argusit.nl/en/blog/risk-policies-id-protection-to-conditional-access) | [2](2026-09-risk-policies-id-protection-to-conditional-access/) |
 | 2026-10-14 | [Entra Connect Sync to Cloud Sync: what the guided migration covers and what stays behind](https://www.argusit.nl/en/blog/entra-connect-sync-to-cloud-sync-what-stays-behind) | [3](2026-10-entra-connect-sync-to-cloud-sync-what-stays-behind/) |
-| 2026-11-04 | [SSPR stops accepting unregistered phone numbers and email addresses on 9 November](https://www.argusit.nl/en/blog/sspr-registered-methods-only) | [1](2026-11-sspr-registered-methods-only/) |
+| 2026-11-04 | [SSPR will stop accepting unregistered phone numbers and email addresses](https://www.argusit.nl/en/blog/sspr-registered-methods-only) | [1](2026-11-sspr-registered-methods-only/) |
 
 Samantha Kloos-Kilkens, [Argus IT](https://www.argusit.nl)
