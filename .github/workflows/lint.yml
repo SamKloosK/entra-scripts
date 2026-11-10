@@ -1,0 +1,33 @@
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          Install-Module PSScriptAnalyzer -Force
+
+      - name: PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          $results = Invoke-ScriptAnalyzer -Path . -Recurse -Settings ./PSScriptAnalyzerSettings.psd1
+          $results | Format-Table -AutoSize RuleName, Severity, ScriptName, Line, Message
+          if ($results | Where-Object Severity -in 'Error', 'ParseError') { throw 'PSScriptAnalyzer found errors.' }
+
+      - name: JSON files parse
+        shell: pwsh
+        run: |
+          foreach ($file in Get-ChildItem -Recurse -Filter *.json) {
+            Get-Content $file -Raw | ConvertFrom-Json -ErrorAction Stop | Out-Null
+            "$($file.Name) parses"
+          }
