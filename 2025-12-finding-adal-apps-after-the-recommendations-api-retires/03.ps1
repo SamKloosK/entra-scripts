@@ -1,4 +1,4 @@
-# From: https://argusit.nl/en/blog/finding-adal-apps-after-the-recommendations-api-retires
+# From: https://www.argusit.nl/en/blog/finding-adal-apps-after-the-recommendations-api-retires
 # Section: Graph PowerShell without Log Analytics
 # Read the post first and test in a non-production tenant.
 

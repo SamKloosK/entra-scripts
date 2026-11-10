@@ -1,4 +1,4 @@
-# From: https://argusit.nl/en/blog/pim-iteration-2-apis-stop-working-october-2026
+# From: https://www.argusit.nl/en/blog/pim-iteration-2-apis-stop-working-october-2026
 # Section: Permission grants and sign-in logs as a second net
 # Read the post first and test in a non-production tenant.
 

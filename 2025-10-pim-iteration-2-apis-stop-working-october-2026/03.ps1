@@ -1,4 +1,4 @@
-# From: https://argusit.nl/en/blog/pim-iteration-2-apis-stop-working-october-2026
+# From: https://www.argusit.nl/en/blog/pim-iteration-2-apis-stop-working-october-2026
 # Section: What the iteration 3 equivalents look like
 # Read the post first and test in a non-production tenant.
 

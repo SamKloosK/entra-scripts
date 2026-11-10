@@ -1,4 +1,4 @@
-# From: https://argusit.nl/en/blog/entra-permissions-management-retires-1-october
+# From: https://www.argusit.nl/en/blog/entra-permissions-management-retires-1-october
 # Section: What Permissions Management leaves behind in Azure
 # Read the post first and test in a non-production tenant.
 

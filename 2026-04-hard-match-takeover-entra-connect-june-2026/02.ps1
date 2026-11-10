@@ -1,4 +1,4 @@
-# From: https://argusit.nl/en/blog/hard-match-takeover-entra-connect-june-2026
+# From: https://www.argusit.nl/en/blog/hard-match-takeover-entra-connect-june-2026
 # Section: Finding admin accounts with an anchor
 # Read the post first and test in a non-production tenant.
 

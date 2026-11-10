@@ -1,4 +1,4 @@
-# From: https://argusit.nl/en/blog/entra-connect-sync-to-cloud-sync-what-stays-behind
+# From: https://www.argusit.nl/en/blog/entra-connect-sync-to-cloud-sync-what-stays-behind
 # Section: What to inventory before you start
 # Read the post first and test in a non-production tenant.
 

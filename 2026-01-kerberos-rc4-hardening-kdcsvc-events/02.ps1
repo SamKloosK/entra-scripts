@@ -1,4 +1,4 @@
-# From: https://argusit.nl/en/blog/kerberos-rc4-hardening-kdcsvc-events
+# From: https://www.argusit.nl/en/blog/kerberos-rc4-hardening-kdcsvc-events
 # Section: Finding them up front with PowerShell
 # Read the post first and test in a non-production tenant.
 

@@ -1,4 +1,4 @@
-# From: https://argusit.nl/en/blog/conditional-access-register-security-information-windows-hello-platform-sso
+# From: https://www.argusit.nl/en/blog/conditional-access-register-security-information-windows-hello-platform-sso
 # Section: Finding the policies
 # Read the post first and test in a non-production tenant.
 

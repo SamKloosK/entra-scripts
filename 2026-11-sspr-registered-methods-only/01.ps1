@@ -1,4 +1,4 @@
-# From: https://argusit.nl/en/blog/sspr-registered-methods-only
+# From: https://www.argusit.nl/en/blog/sspr-registered-methods-only
 # Section: Finding them before enforcement
 # Read the post first and test in a non-production tenant.
 

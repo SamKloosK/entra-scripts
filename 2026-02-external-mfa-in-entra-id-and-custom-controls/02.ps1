@@ -1,4 +1,4 @@
-# From: https://argusit.nl/en/blog/external-mfa-in-entra-id-and-custom-controls
+# From: https://www.argusit.nl/en/blog/external-mfa-in-entra-id-and-custom-controls
 # Section: Running both during the migration
 # Read the post first and test in a non-production tenant.
 
